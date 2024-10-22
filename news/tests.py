@@ -79,6 +79,12 @@ class ArticleTestClass(TestCase):
         today_news = Article.today_news()
         self.asserTrue(len(today_news)>0)
 
+    def test_get_news_by_date(self):
+        test_date = '22-10-2024'
+        date = dt.datetime.strptime(test_date, '%d-%M-%Y').date()
+        news_by_date = Article.days_news(date)
+        self.assertTrue(len(news_by_date) == 0)
+
     # test for updating a single object property
     def test_update_article(self):
         self.new_article.save()
