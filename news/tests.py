@@ -62,7 +62,7 @@ class ArticleTestClass(TestCase):
         self.assertTrue(len(articles) > 0)
 
     # Test for deleting a model object
-    def test_delete_artcile(self):
+    def test_delete_article(self):
         self.new_article.save()
         self.new_article.delete()
         articles =Article.objects.all()
@@ -73,6 +73,11 @@ class ArticleTestClass(TestCase):
         self.new_article.save()
         articles = Article.objects.all()
         self.assertIn(self.new_article, articles)
+
+    # Test To get Today's News
+    def test_get_news_today(self):
+        today_news = Article.today_news()
+        self.asserTrue(len(today_news)>0)
 
     # test for updating a single object property
     def test_update_article(self):
