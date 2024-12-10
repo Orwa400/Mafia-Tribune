@@ -45,7 +45,6 @@ def past_days_news(request, past_date):
 def news_today(request):
     date = dt.date.today()
     news = Article.today_news()
-    return render(request, 'all-news/today-news.html', {"date": date, "news":news})
 
     if request.method == 'POST':
         form = NewsLetterForm(request.POST)
@@ -56,9 +55,10 @@ def news_today(request):
             recipient.save()
             send_welcome_email(name,email)
             
-            HttpResponseRedirect('news_today')
+            HttpResponsesRedirect('news_today')
     else:
         form = NewsLetterForm()
+
     return render(request, 'all-news/today-news.html', {"date": date, "news":news, "letterForm":form})
 
 def search_results(request):
@@ -77,8 +77,8 @@ def search_results(request):
 @login_required(login_url='/accounts/login/')
 def article(request, article_id):
     try:
-        article = Article.objeccts.get(id = article_id)
-    except DoesNotExist:
+        article = Article.objects.get(id = article_id)
+    except Article.DoesNotExist:
         raise Http404()
         return render(request,"all-news/article.html", {"article":article})
 
